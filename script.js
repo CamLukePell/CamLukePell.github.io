@@ -12,7 +12,7 @@ const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
 
 // Song titles
-const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]',
+const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]'
 ];
 
 shuffle(songs);
