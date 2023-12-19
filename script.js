@@ -10,24 +10,29 @@ const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
+const songs =[]
+ $.getJSON('https://camlukepell.github.io/music', data => {
+        console.log(data);
+        songs.push(data); //["doc1.jpg", "doc2.jpg", "doc3.jpg"]
+    });
 
-// Song titles
-const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
-'Green Day  Look Ma, No Brains! (Lyrics)','Green Day  Dilemma (Lyrics)','Welcome to Paradise',
-'Love From The Other Side (Edit)','Fall Out Boy - Heartbreak Feels So Good (Audio)',
-'Fall Out Boy - Hold Me Like a Grudge (Official Audio)','Fall Out Boy - So Much (For) Stardust (Official Audio)',
-'Simple Plan - Congratulations (Official Visualizer)','Simple Plan - Ruin My Life ft. Deryck Whibley (Lyric Video)',
-'Sum 41 - Walking Disaster','Catching Fire (feat. nothing,nowhere.)','Sum 41 - Out For Blood (Audio)',
-'Taylor Acorn - Psycho (Official Audio)','Taylor Acorn - Shape Shifting (Official Audio)',
-'Taylor Acorn - Coma (Official Audio)','Taylor Acorn - twenty eight (official audio)','Taylor Acorn - I Think I\'m in Love (Official Audio)',
-'Taylor Swift - Wildest Dreams (Taylor\'s Version) (Lyric Video)','Taylor Swift - Mean (Taylor\'s Version) (Lyric Video)',
-'Taylor Swift - You Belong With Me (Taylor\'s Version) (Lyric Video)','Taylor Swift - You\'re On Your Own, Kid (Official Lyric Video)',
-'Taylor Swift - Anti-Hero (Official Lyric Video)','Taylor Swift - Mastermind (Official Lyric Video)','Modern Girl',
-'Bleachers - Rollercoaster (Audio)','Bleachers - Dont Take The Money (Gone Now 2017)','Bleachers - I Miss Those Days',
-'Bleachers - I Wanna Get Better (Official Audio)'
-];
+//Song titles
+//const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
+//'Green Day  Look Ma, No Brains! (Lyrics)','Green Day  Dilemma (Lyrics)','Welcome to Paradise',
+//'Love From The Other Side (Edit)','Fall Out Boy - Heartbreak Feels So Good (Audio)',
+//'Fall Out Boy - Hold Me Like a Grudge (Official Audio)','Fall Out Boy - So Much (For) Stardust (Official Audio)',
+//'Simple Plan - Congratulations (Official Visualizer)','Simple Plan - Ruin My Life ft. Deryck Whibley (Lyric Video)',
+//'Sum 41 - Walking Disaster','Catching Fire (feat. nothing,nowhere.)','Sum 41 - Out For Blood (Audio)',
+//'Taylor Acorn - Psycho (Official Audio)','Taylor Acorn - Shape Shifting (Official Audio)',
+//'Taylor Acorn - Coma (Official Audio)','Taylor Acorn - twenty eight (official audio)','Taylor Acorn - I Think I\'m in Love (Official Audio)',
+//'Taylor Swift - Wildest Dreams (Taylor\'s Version) (Lyric Video)','Taylor Swift - Mean (Taylor\'s Version) (Lyric Video)',
+//'Taylor Swift - You Belong With Me (Taylor\'s Version) (Lyric Video)','Taylor Swift - You\'re On Your Own, Kid (Official Lyric Video)',
+//'Taylor Swift - Anti-Hero (Official Lyric Video)','Taylor Swift - Mastermind (Official Lyric Video)','Modern Girl',
+//'Bleachers - Rollercoaster (Audio)','Bleachers - Dont Take The Money (Gone Now 2017)','Bleachers - I Miss Those Days',
+//'Bleachers - I Wanna Get Better (Official Audio)'
+//];
 
-shuffle(songs);
+//shuffle(songs);
 
 // Keep track of song
 let songIndex = 0;
@@ -210,3 +215,24 @@ audio.addEventListener('ended', nextSong);
 
 // Time of song
 audio.addEventListener('timeupdate',DurTime);
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+
+    // Get the container and the list
+    var container = document.getElementById('scrollable-list-container');
+    var list = document.getElementById('scrollable-list');
+
+    // Array of items to be added to the list
+    var itemsToAdd = songs;
+
+    // Loop through the array and create a new <li> element for each item
+    itemsToAdd.forEach(function (itemText) {
+        var listItem = document.createElement('li');
+        listItem.textContent = itemText;
+        list.appendChild(listItem);
+    });
+
+
+});
