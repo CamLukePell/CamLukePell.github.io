@@ -19,14 +19,14 @@
               margin: 0; /* Reset default body margin */
           }
 #scrollable-list-container {
-    width: 300px;
-    max-height: 100vh; /* Set a fixed max-height value */
+    width: 100vw;
+    max-height: 41vh; /* Set a fixed max-height value */
     overflow-y: auto;
     border:0px;
 
     /* Position relative to the body */
     position: absolute;
-    top: 0%;
+    top: 59%;
     left: 0%;
 }
 
@@ -39,14 +39,17 @@
         #scrollable-list li {
             padding: 10px;
             border-bottom: 1px solid #eee;
-            border-color: black;
-            background-color: #fff;
+            border-color: white;
+            background-color: #555555;
             border: 1;
-            color: black;
+            color: white;
             font-size: 20px;
             cursor: pointer;
-            margin: 0 20px;
+            margin: 0 0px;
           }
+        #scrollable-list li.active-song {
+        background-color: #fffff; /* Highlight color for the active song */
+}
     </style>
 </head>
 <body>
@@ -75,13 +78,14 @@
         <button id="next" class="action-btn">
             <i class="fas fa-forward"></i>
         </button>
+        <button id="shuffle" class="action-btn">
+            <i class="fas fa-random"></i>
+        </button>
     </div>
 </div>
 
 <div id="scrollable-list-container">
-    <ul id="scrollable-list">
-        <!-- List items will be dynamically added here using JavaScript -->
-    </ul>
+    <ul id="scrollable-list"></ul>
 </div>
 
 <script src="script.js"></script>

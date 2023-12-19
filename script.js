@@ -2,6 +2,7 @@ const musicContainer = document.getElementById('music-container');
 const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
+const shuffleBtn = document.getElementById('shuffle');
 
 const audio = document.getElementById('audio');
 const progress = document.getElementById('progress');
@@ -10,27 +11,37 @@ const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
-const songs =[]
- $.getJSON('https://camlukepell.github.io/music', data => {
-        console.log(data);
-        songs.push(data); //["doc1.jpg", "doc2.jpg", "doc3.jpg"]
-    });
 
-//Song titles
-//const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
-//'Green Day  Look Ma, No Brains! (Lyrics)','Green Day  Dilemma (Lyrics)','Welcome to Paradise',
-//'Love From The Other Side (Edit)','Fall Out Boy - Heartbreak Feels So Good (Audio)',
-//'Fall Out Boy - Hold Me Like a Grudge (Official Audio)','Fall Out Boy - So Much (For) Stardust (Official Audio)',
-//'Simple Plan - Congratulations (Official Visualizer)','Simple Plan - Ruin My Life ft. Deryck Whibley (Lyric Video)',
-//'Sum 41 - Walking Disaster','Catching Fire (feat. nothing,nowhere.)','Sum 41 - Out For Blood (Audio)',
-//'Taylor Acorn - Psycho (Official Audio)','Taylor Acorn - Shape Shifting (Official Audio)',
-//'Taylor Acorn - Coma (Official Audio)','Taylor Acorn - twenty eight (official audio)','Taylor Acorn - I Think I\'m in Love (Official Audio)',
-//'Taylor Swift - Wildest Dreams (Taylor\'s Version) (Lyric Video)','Taylor Swift - Mean (Taylor\'s Version) (Lyric Video)',
-//'Taylor Swift - You Belong With Me (Taylor\'s Version) (Lyric Video)','Taylor Swift - You\'re On Your Own, Kid (Official Lyric Video)',
-//'Taylor Swift - Anti-Hero (Official Lyric Video)','Taylor Swift - Mastermind (Official Lyric Video)','Modern Girl',
-//'Bleachers - Rollercoaster (Audio)','Bleachers - Dont Take The Money (Gone Now 2017)','Bleachers - I Miss Those Days',
-//'Bleachers - I Wanna Get Better (Official Audio)'
-//];
+
+const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
+'Green Day  Look Ma, No Brains! (Lyrics)','Green Day  Dilemma (Lyrics)','Welcome to Paradise',
+'Love From The Other Side (Edit)','Fall Out Boy - Heartbreak Feels So Good (Audio)',
+'Fall Out Boy - Hold Me Like a Grudge (Official Audio)','Fall Out Boy - So Much (For) Stardust (Official Audio)',
+'Simple Plan - Congratulations (Official Visualizer)','Simple Plan - Ruin My Life ft. Deryck Whibley (Lyric Video)',
+'Sum 41 - Walking Disaster','Catching Fire (feat. nothing,nowhere.)','Sum 41 - Out For Blood (Audio)',
+'Taylor Acorn - Psycho (Official Audio)','Taylor Acorn - Shape Shifting (Official Audio)',
+'Taylor Acorn - Coma (Official Audio)','Taylor Acorn - twenty eight (official audio)','Taylor Acorn - I Think I\'m in Love (Official Audio)',
+'Taylor Swift - Wildest Dreams (Taylor\'s Version) (Lyric Video)','Taylor Swift - Mean (Taylor\'s Version) (Lyric Video)',
+'Taylor Swift - You Belong With Me (Taylor\'s Version) (Lyric Video)','Taylor Swift - You\'re On Your Own, Kid (Official Lyric Video)',
+'Taylor Swift - Anti-Hero (Official Lyric Video)','Taylor Swift - Mastermind (Official Lyric Video)','Modern Girl',
+'Bleachers - Rollercoaster (Audio)','Bleachers - Dont Take The Money (Gone Now 2017)','Bleachers - I Miss Those Days',
+'Bleachers - I Wanna Get Better (Official Audio)','10 for 10','A Little Less Sixteen Candles, A Little More _Touch Me_',
+'A Long Way Down','Airplanes (feat. Hayley Williams of Paramore)','All My Friends Are Nobodies','All Signs Point To Lauderdale',
+'All The Small Things','Ancient History','Anti-Hero','Beacon','Beverly Hills','Bite Me','Bored','Break The Glass','broken',
+'Congratulations','C’est Comme Ça','Dandelions','Dear Maria, Count Me In','Death Wish','Different','Dirty Little Secret',
+'Don\'t Lose Touch','EDGING','Everybody but You','Evil Anonymous','Feel Something','Ghost Story','Heartbreak Feels So Good',
+'Hero','Hold Me Like a Grudge','Hollywood','I Think I\'m in Love','In Too Deep','It\'s Time','Jackson, You Are Dying','Keep Swinging',
+'Know Your Enemy','Lay Me to Rest','Lisztomania','Longview','Lost','Love From The Other Side',
+'Loved You A Little (with Taking Back Sunday and Charlotte Sands)','Mercy Me','Middle Seat Blues',
+'Misery Business','Modern Love','Mr. Brightside','My Songs Know What You Did In The Dark (Light Em Up)','Novocaine',
+'Now','Oh Love','Out For Blood','Outta My Head','Pages','Pollyanna','Pour Decisions','Psycho','Punk Rock Songs','Raised By Wolves',
+'Rock N Roll','Roomer','Ruin My Life (feat. Deryck Whibley)','Running Out Of Time','Shapeshifting','She\'s Kerosene','She',
+'So What','Some Say','Somebody Told Me','sorry mom x','Still Breathing','Still into You','Sugar, We\'re Goin Down','Thanks for Nothing','That\'s What You Get',
+'The Anthem','The Hard Way','The Kids Aren\'t Alright','The News','The Phoenix','Think Of You','This Is Why','Thnks fr th Mmrs','U + Ur Hand','Waiting',
+'Wake Me Up (When This Nightmare’s Over)','Wake Me Up','Wallflower','We Are Never Ever Getting Back Together (Taylor\'s Version)',
+'Welcome to Paradise','What the Hell','Why Worry','Wishing You Hell','Wolf in Sheep\'s Clothing','Worse Than This',
+'You Belong With Me (Taylor’s Version)','You\'re Gonna Go Far, Kid'
+];
 
 //shuffle(songs);
 
@@ -199,10 +210,18 @@ playBtn.addEventListener('click', () => {
     playSong();
   }
 });
+shuffleBtn.addEventListener('click', () => {
+  shuffle(songs);
+  songIndex = 0;
+ loadSong(songs[songIndex]);
+ playSong();
+});
 
 // Change song
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
+
+
 
 // Time/song update
 audio.addEventListener('timeupdate', updateProgress);
@@ -218,7 +237,8 @@ audio.addEventListener('timeupdate',DurTime);
 
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    songs.sort();
+    // Your existing code...
 
     // Get the container and the list
     var container = document.getElementById('scrollable-list-container');
@@ -228,11 +248,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var itemsToAdd = songs;
 
     // Loop through the array and create a new <li> element for each item
-    itemsToAdd.forEach(function (itemText) {
+    itemsToAdd.forEach(function (itemText, index) {
         var listItem = document.createElement('li');
         listItem.textContent = itemText;
+
+        // Add a click event listener to the list item
+        listItem.addEventListener('click', function () {
+            // Load and play the selected song
+            songIndex= index;
+            loadSong(songs[index]);
+            playSong();
+        });
+
+        // Append the list item to the list
         list.appendChild(listItem);
     });
-
 
 });

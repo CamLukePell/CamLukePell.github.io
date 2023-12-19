@@ -20,9 +20,8 @@ body {
 }
 
 .music-container {
-  background-color: #fff;
+  background-color: #222222;
   border-radius: 15px;
-  box-shadow: 0 20px 20px 0 rgba(252, 169, 169, 0.6);
   display: flex;
   padding: 20px 30px;
   position: relative;
@@ -82,9 +81,9 @@ body {
 }
 
 .action-btn {
-  background-color: #fff;
+  background-color: #222222;
   border: 0;
-  color: #dfdbdf;
+  color: #f000f0;
   font-size: 20px;
   cursor: pointer;
   padding: 10px;
@@ -92,7 +91,7 @@ body {
 }
 
 .action-btn.action-btn-big {
-  color: #cdc2d0;
+  color: #f000f0;
   font-size: 30px;
 }
 
@@ -101,7 +100,7 @@ body {
 }
 
 .music-info {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(50, 50, 50, 1);
   border-radius: 15px 15px 0 0;
   position: absolute;
   top: 0;
@@ -116,10 +115,12 @@ body {
 
 .music-container.play .music-info {
   opacity: 1;
+
   transform: translateY(-100%);
 }
 
 .music-info h4 {
+  color: #ffffff;
   margin: 0;
 }
 
@@ -133,7 +134,7 @@ body {
 }
 
 .progress {
-  background-color: #fe8daa;
+  background-color: #f000f0;
   border-radius: 5px;
   height: 100%;
   width: 0%;
