@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   background-image: linear-gradient(
     0deg,
@@ -23,41 +24,42 @@ body {
   background-color: #222222;
   border-radius: 15px;
   display: flex;
-  padding: 20px 30px;
+  padding: 0px 30px;
   position: relative;
   margin: 100px 0;
   z-index: 10;
 }
 
-.img-container {
-  position: relative;
+
+
+.img-container.coverPic img {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 110px;
   width: 110px;
+  position: relative;
+  bottom: 50%;
+  left: 0;
+  animation: rotate 3s linear infinite;
+  animation-play-state: paused;
 }
 
-.img-container::after {
+.img-container.coverPic::after {
   content: '';
   background-color: #fff;
   border-radius: 50%;
   position: absolute;
   bottom: 100%;
-  left: 50%;
+  left: 17%;
   width: 20px;
   height: 20px;
   transform: translate(-50%, 50%);
 }
 
-.img-container img {
-  border-radius: 50%;
-  object-fit: cover;
-  height: 110px;
-  width: inherit;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  animation: rotate 3s linear infinite;
 
-  animation-play-state: paused;
-}
+
+
+
 
 .music-container.play .img-container img {
   animation-play-state: running;
@@ -80,10 +82,11 @@ body {
   z-index: 1;
 }
 
+
 .action-btn {
   background-color: #222222;
   border: 0;
-  color: #f000f0;
+  color: white;
   font-size: 20px;
   cursor: pointer;
   padding: 10px;
@@ -91,7 +94,7 @@ body {
 }
 
 .action-btn.action-btn-big {
-  color: #f000f0;
+  color: white;
   font-size: 30px;
 }
 
@@ -129,7 +132,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   margin: 10px 0;
-  height: 4px;
+  height: 10px;
   width: 100%;
 }
 
@@ -140,3 +143,68 @@ body {
   width: 0%;
   transition: width 0.1s linear;
 }
+
+#shuffle.pressed {
+  color:#f000f0;
+
+}
+body {
+            margin: 0; /* Reset default body margin */
+        }
+
+        #scrollable-list-container {
+            width: 100vw;
+            max-height: 30vh; /* Set a fixed max-height value */
+            overflow-y: auto;
+            border: 0px;
+            /* Position relative to the body */
+            position: absolute;
+            top: 70%;
+            left: 0%;
+        }
+
+        #scrollable-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #scrollable-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            border-color: white;
+            background-color: #555555;
+            border: 1;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 0 0px;
+        }
+
+        #scrollable-list li.active-song {
+            background-color: #fffff; /* Highlight color for the active song */
+        }
+
+ body {
+            margin: 0;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+        }
+.img-container.doggo1Pic img {
+    position: absolute;
+    width: 50%;
+    height:70%;
+    top: 00%;
+    left: 00%;
+    object-fit: cover;
+}
+.img-container.doggo2Pic img {
+    width: 50%;
+    height:70%;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    object-fit: cover;
+}
+
+
+

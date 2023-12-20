@@ -1,59 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
     <link rel="stylesheet" href="style.css"/>
     <link rel="icon" type="image/png" href="images/workout.png"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-    <title>Testing</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Good Doggo</title>
 
-    <style>
-        body {
-              margin: 0; /* Reset default body margin */
-          }
-#scrollable-list-container {
-    width: 100vw;
-    max-height: 41vh; /* Set a fixed max-height value */
-    overflow-y: auto;
-    border:0px;
-
-    /* Position relative to the body */
-    position: absolute;
-    top: 59%;
-    left: 0%;
-}
-
-        #scrollable-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #scrollable-list li {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            border-color: white;
-            background-color: #555555;
-            border: 1;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            margin: 0 0px;
-          }
-        #scrollable-list li.active-song {
-        background-color: #fffff; /* Highlight color for the active song */
-}
-    </style>
 </head>
 <body>
-<h1>Bing Bong</h1>
+<div class="img-container doggo1Pic">
+    <img alt="TACO" id="doggo1"/>
+</div>
+<div class="img-container doggo2Pic">
+    <img alt="TACO" id="doggo2"/>
+</div>
 
 <div class="music-container" id="music-container">
     <div class="music-info">
@@ -61,13 +27,17 @@
         <div class="progress-container" id="progress-container">
             <div class="progress" id="progress"></div>
         </div>
+        <span id="currTime"></span> <!-- Place the currTime element here -->
+        <span id="durTime"></span>
     </div>
 
     <audio id="audio"></audio>
 
-    <div class="img-container">
+    <div class="img-container coverPic">
         <img alt="music-cover" id="cover"/>
     </div>
+
+
     <div class="navigation">
         <button id="prev" class="action-btn">
             <i class="fas fa-backward"></i>
@@ -83,6 +53,7 @@
         </button>
     </div>
 </div>
+
 
 <div id="scrollable-list-container">
     <ul id="scrollable-list"></ul>

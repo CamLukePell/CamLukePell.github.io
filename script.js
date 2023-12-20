@@ -6,14 +6,17 @@ const shuffleBtn = document.getElementById('shuffle');
 
 const audio = document.getElementById('audio');
 const progress = document.getElementById('progress');
+const doggo1 = document.getElementById('doggo1');
+const doggo2 = document.getElementById('doggo2');
 const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
+let shuffleBool = false;
 
 
-const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
+var songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
 'Green Day  Look Ma, No Brains! (Lyrics)','Green Day  Dilemma (Lyrics)','Welcome to Paradise',
 'Love From The Other Side (Edit)','Fall Out Boy - Heartbreak Feels So Good (Audio)',
 'Fall Out Boy - Hold Me Like a Grudge (Official Audio)','Fall Out Boy - So Much (For) Stardust (Official Audio)',
@@ -42,6 +45,8 @@ const songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  Th
 'Welcome to Paradise','What the Hell','Why Worry','Wishing You Hell','Wolf in Sheep\'s Clothing','Worse Than This',
 'You Belong With Me (Taylor’s Version)','You\'re Gonna Go Far, Kid'
 ];
+const originalSongs = [...songs.sort()];
+var shuffledSongs = [...songs];
 
 //shuffle(songs);
 
@@ -196,7 +201,7 @@ function DurTime (e) {
 	get_sec_d (duration);
 
 	// change duration DOM
-	durTime.innerHTML = min_d +':'+ sec_d;
+	durTime.innerHTML = ' / '+min_d +':'+ sec_d;
 
 };
 
@@ -211,11 +216,17 @@ playBtn.addEventListener('click', () => {
   }
 });
 shuffleBtn.addEventListener('click', () => {
-  shuffle(songs);
-  songIndex = 0;
- loadSong(songs[songIndex]);
- playSong();
-});
+   shuffleBtn.classList.toggle('pressed');
+
+   shuffleBool = !shuffleBool;
+   if(shuffleBool){
+   shuffle(shuffledSongs);
+   songs = [...shuffledSongs];
+   }else{
+   songs = [...originalSongs];
+   }
+   songIndex = songs.indexOf(title.innerText);
+   });
 
 // Change song
 prevBtn.addEventListener('click', prevSong);
@@ -237,6 +248,10 @@ audio.addEventListener('timeupdate',DurTime);
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    doggo1.src = `images/doggo1.jpeg`;
+    doggo2.src = `images/doggo2.jpeg`;
+
+    id="currTime"
     songs.sort();
     // Your existing code...
 
@@ -255,8 +270,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add a click event listener to the list item
         listItem.addEventListener('click', function () {
             // Load and play the selected song
-            songIndex= index;
-            loadSong(songs[index]);
+               if(shuffleBool){
+               shuffle(shuffledSongs);
+               songs = [...shuffledSongs];
+               }
+
+            songIndex= songs.indexOf(originalSongs[index]);
+            loadSong(songs[songIndex]);
             playSong();
         });
 
