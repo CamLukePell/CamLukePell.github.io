@@ -124,10 +124,10 @@ body {
   color:#f000f0;
 }
 #music-container.pressed{
-
+visibility: hidden;
 }
 #scrollable-list-container.pressed{
-
+visibility: hidden;
 }
 body {
             margin: 0; /* Reset default body margin */
