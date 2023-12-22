@@ -3,20 +3,29 @@ const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const shuffleBtn = document.getElementById('shuffle');
+const repeatBtn = document.getElementById('repeat');
+const songListBtn = document.getElementById('songList');
+const hiddenBtn = document.getElementById('hidden');
 
 const audio = document.getElementById('audio');
 const progress = document.getElementById('progress');
 const doggo1 = document.getElementById('doggo1');
 const doggo2 = document.getElementById('doggo2');
+const doggo3 = document.getElementById('doggo3');
+const doggo4 = document.getElementById('doggo4');
 const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
-const cover = document.getElementById('cover');
+
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
+let list1 = true;
 let shuffleBool = false;
+let repeatBool = false;
+hiddenBool = false;
 
 
-var songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
+
+const OGSONGS1 = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
 'Green Day  Look Ma, No Brains! (Lyrics)','Green Day  Dilemma (Lyrics)','Welcome to Paradise',
 'Love From The Other Side (Edit)','Fall Out Boy - Heartbreak Feels So Good (Audio)',
 'Fall Out Boy - Hold Me Like a Grudge (Official Audio)','Fall Out Boy - So Much (For) Stardust (Official Audio)',
@@ -26,9 +35,7 @@ var songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The 
 'Taylor Acorn - Coma (Official Audio)','Taylor Acorn - twenty eight (official audio)','Taylor Acorn - I Think I\'m in Love (Official Audio)',
 'Taylor Swift - Wildest Dreams (Taylor\'s Version) (Lyric Video)','Taylor Swift - Mean (Taylor\'s Version) (Lyric Video)',
 'Taylor Swift - You Belong With Me (Taylor\'s Version) (Lyric Video)','Taylor Swift - You\'re On Your Own, Kid (Official Lyric Video)',
-'Taylor Swift - Anti-Hero (Official Lyric Video)','Taylor Swift - Mastermind (Official Lyric Video)','Modern Girl',
-'Bleachers - Rollercoaster (Audio)','Bleachers - Dont Take The Money (Gone Now 2017)','Bleachers - I Miss Those Days',
-'Bleachers - I Wanna Get Better (Official Audio)','10 for 10','A Little Less Sixteen Candles, A Little More _Touch Me_',
+'Taylor Swift - Anti-Hero (Official Lyric Video)','Taylor Swift - Mastermind (Official Lyric Video)','10 for 10','A Little Less Sixteen Candles, A Little More _Touch Me_',
 'A Long Way Down','Airplanes (feat. Hayley Williams of Paramore)','All My Friends Are Nobodies','All Signs Point To Lauderdale',
 'All The Small Things','Ancient History','Anti-Hero','Beacon','Beverly Hills','Bite Me','Bored','Break The Glass','broken',
 'Congratulations','C’est Comme Ça','Dandelions','Dear Maria, Count Me In','Death Wish','Different','Dirty Little Secret',
@@ -43,16 +50,54 @@ var songs = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The 
 'The Anthem','The Hard Way','The Kids Aren\'t Alright','The News','The Phoenix','Think Of You','This Is Why','Thnks fr th Mmrs','U + Ur Hand','Waiting',
 'Wake Me Up (When This Nightmare’s Over)','Wake Me Up','Wallflower','We Are Never Ever Getting Back Together (Taylor\'s Version)',
 'Welcome to Paradise','What the Hell','Why Worry','Wishing You Hell','Wolf in Sheep\'s Clothing','Worse Than This',
-'You Belong With Me (Taylor’s Version)','You\'re Gonna Go Far, Kid'
+'You Belong With Me (Taylor’s Version)','You\'re Gonna Go Far, Kid','Modern Girl','Rollercoaster','Dont Take The Money','I Miss Those Days',
+'I Wanna Get Better'
 ];
-const originalSongs = [...songs.sort()];
-var shuffledSongs = [...songs];
 
-//shuffle(songs);
+const OGSONGS2 =['All I Want','All The Small Things','Another F.U. Song - Another F.U. Song',
+                 'Anything Was Better','Bad Time','Bigger Than Kiss',
+                 'Come Out and Play','DANCE WITH ME','Darby Crashing Your Party',
+                 'EDGING','Feeling This','Forget It All',
+                 'Fuck You','Here In Your Bedroom','Hey Driver',
+                 'I Think We\'re Alone Now','I Was a Teenage Anarchist','I Was Wrong',
+                 'Loser','Mercy Me','My Everything',
+                 'My Own Worst Enemy','Not Today','Ocean Avenue',
+                 'OTHER SIDE','Outrage','Rabbit Hole (Explicit)',
+                 'Raised By Wolves','She Has a Girlfriend Now','She\'s Kerosene',
+                 'SKATE','Somewhere On Fullerton','Stay Up All Night',
+                 'Substitute','Take Back The Power','Ten Stories High',
+                 'The American Scream','THE FIGHT OF OUR LIVES (feat. Tim McIlrath of Rise Against & Brian Baker of Bad Religion)','The High Cost of Low Living',
+                 'The Man I Killed','The Middle','The Rock Show',
+                 'Time Bomb','Unstoppable','Wallflower',
+                 'Want You Bad','We Never Have Sex Anymore','Who\'s Laughing Now',
+                 'Why Don\'t You Get A Job','You\'re Gonna Go Far, Kid',
+                 '3 AM','Bad Intentions','Brick by Boring Brick',
+                 'Calm Down','Check Yes, Juliet','College Kids',
+                 'Complete Collapse','crushcrushcrush','C’est Comme Ça',
+                 'Dandelions','Dear Maria, Count Me In','Dirty Little Secret',
+                 'Everybody but You','Everything Is Alright','Faster Ride',
+                 'Feel Good Drag','Go To Hell','Good Advice',
+                 'hair out','Hold Me Like a Grudge','I MISS 2003',
+                 'I\'ve Been Dead All Day','Jamie All Over','Just Like Home',
+                 'Little Lion Man','Loved You A Little (with Taking Back Sunday and Charlotte Sands)','Memory',
+                 'Misery Business','Mistake','Modern Love',
+                 'One Of THOSE Nights','Punk Rock Songs','Red Light Kisser (with Jordan Pundik of New Found Glory)',
+                 'Right Girl','Rose-Colored Boy','Running Out Of Time',
+                 'Sleeping In','Sleepwalking','Some Kind of Disaster',
+                 'sorry mom x','Strangest Faces','Take Your Jacket',
+                 'Teenagers','Tell Me I\'m A Wreck','Tell Me I’m Alive',
+                 'That\'s What You Get','The Best Of Me','The Best Thing (That Never Happened)',
+                 'Voldemort','We Don\'t Get High Like We Used To',
+                 ];
+
+
+var songs = [...OGSONGS1.sort()];
+var originalSongs =[...songs];
+var shuffledSongs = [...shuffle(songs)];
+
 
 // Keep track of song
 let songIndex = 0;
-
 // Initially load song details into DOM
 loadSong(songs[songIndex]);
 
@@ -75,11 +120,18 @@ function shuffle(array) {
   return array;
 }
 
+
 // Update song details
 function loadSong(song) {
-  title.innerText = song;
-  audio.src = `music/${song}.mp3`;
-  cover.src = `images/workout.jpg`;
+
+    title.innerText = song;
+  if(list1){
+   audio.src = `music/Songs1/${song}.mp3`;
+  }
+  else{
+  audio.src = `music/Songs2/${song}.mp3`;
+  }
+
 }
 
 // Play song
@@ -87,8 +139,17 @@ function playSong() {
   musicContainer.classList.add('play');
   playBtn.querySelector('i.fas').classList.remove('fa-play');
   playBtn.querySelector('i.fas').classList.add('fa-pause');
-
+    const listItems = document.querySelectorAll('#scrollable-list li');
+    highlightIndex = originalSongs.indexOf(songs[songIndex]);
+    listItems.forEach((item, i) => {
+  if (i === highlightIndex) {
+    item.classList.add('active-song');
+  } else {
+    item.classList.remove('active-song');
+  }
+});
   audio.play();
+
 }
 
 // Pause song
@@ -96,13 +157,21 @@ function pauseSong() {
   musicContainer.classList.remove('play');
   playBtn.querySelector('i.fas').classList.add('fa-play');
   playBtn.querySelector('i.fas').classList.remove('fa-pause');
+  const listItems = document.querySelectorAll('#scrollable-list li');
+  listItems.forEach((item, i) => {
 
+    item.classList.remove('active-song');
+
+});
   audio.pause();
 }
 
 // Previous song
 function prevSong() {
+if(!repeatBool){
   songIndex--;
+}
+
 
   if (songIndex < 0) {
     songIndex = songs.length - 1;
@@ -115,8 +184,9 @@ function prevSong() {
 
 // Next song
 function nextSong() {
+  if(!repeatBool){
   songIndex++;
-
+}
   if (songIndex > songs.length - 1) {
     songIndex = 0;
   }
@@ -217,7 +287,6 @@ playBtn.addEventListener('click', () => {
 });
 shuffleBtn.addEventListener('click', () => {
    shuffleBtn.classList.toggle('pressed');
-
    shuffleBool = !shuffleBool;
    if(shuffleBool){
    shuffle(shuffledSongs);
@@ -227,6 +296,47 @@ shuffleBtn.addEventListener('click', () => {
    }
    songIndex = songs.indexOf(title.innerText);
    });
+
+repeatBtn.addEventListener('click', () => {
+   repeatBtn.classList.toggle('pressed');
+   repeatBool = !repeatBool;
+   });
+
+songListBtn.addEventListener('click', () => {
+    songListBtn.classList.toggle('pressed');
+    pauseSong();
+    list1 = !list1;
+
+
+      if(list1){
+          originalSongs = [...OGSONGS1.sort()];
+          shuffledSongs= [...shuffle(OGSONGS1)];
+          songs = [...originalSongs];
+      }
+      else{
+          originalSongs = [...OGSONGS2.sort()];
+          shuffledSongs= [...shuffle(OGSONGS2)];
+          songs = [...originalSongs];
+      }
+
+
+
+
+       clearList();
+       fillList(songs);
+       if(shuffleBool){
+                     shuffle(songs);
+                     }
+       songIndex = 0;
+       loadSong(songs[songIndex]);
+
+    });
+
+    hiddenBtn.addEventListener('click', () => {
+       musicContainer.classList.toggle('pressed');
+       document.getElementById('scrollable-list-container').classList.toggle('pressed');
+       hiddenBool = !hiddenBool;
+       });
 
 // Change song
 prevBtn.addEventListener('click', prevSong);
@@ -247,16 +357,11 @@ audio.addEventListener('ended', nextSong);
 audio.addEventListener('timeupdate',DurTime);
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    doggo1.src = `images/doggo1.jpeg`;
-    doggo2.src = `images/doggo2.jpeg`;
-
-    id="currTime"
-    songs.sort();
+function fillList(array) {
     // Your existing code...
-
+    array.sort();
     // Get the container and the list
-    var container = document.getElementById('scrollable-list-container');
+
     var list = document.getElementById('scrollable-list');
 
     // Array of items to be added to the list
@@ -283,5 +388,35 @@ document.addEventListener('DOMContentLoaded', function () {
         // Append the list item to the list
         list.appendChild(listItem);
     });
+}
+
+function clearList() {
+    const list = document.getElementById('scrollable-list');
+    while (list.firstChild) {
+        list.removeChild(list.firstChild);
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    doggo1.src = `images/doggo1.jpeg`;
+    doggo2.src = `images/doggo2.jpeg`;
+    doggo3.src = `images/doggo3.jpeg`;
+    doggo4.src = `images/doggo4.jpeg`;
+
+    id="currTime"
+    fillList(songs);
+
+    const audio = document.getElementById('audio');
+                const volumeControl = document.getElementById('volume-control');
+
+                // Set initial volume to 1 (100%)
+                audio.volume = 1;
+
+                // Update volume when the slider is changed
+                volumeControl.addEventListener('input', function () {
+                    audio.volume = this.value;
+                });
+                loadSong(songs[songIndex]);
 
 });

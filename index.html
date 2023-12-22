@@ -14,11 +14,21 @@
 
 </head>
 <body>
+<button id="hidden" class="action-btn">
+
+</button>
+
 <div class="img-container doggo1Pic">
     <img alt="TACO" id="doggo1"/>
 </div>
 <div class="img-container doggo2Pic">
     <img alt="TACO" id="doggo2"/>
+</div>
+<div class="img-container doggo3Pic">
+    <img alt="TACO" id="doggo3"/>
+</div>
+<div class="img-container doggo4Pic">
+    <img alt="TACO" id="doggo4"/>
 </div>
 
 <div class="music-container" id="music-container">
@@ -31,14 +41,20 @@
         <span id="durTime"></span>
     </div>
 
-    <audio id="audio"></audio>
+    <audio id="audio">
+    </audio>
 
-    <div class="img-container coverPic">
-        <img alt="music-cover" id="cover"/>
-    </div>
+
+
 
 
     <div class="navigation">
+        <button id="songList" class="action-btn">
+            <i class="fas fa-star"></i>
+        </button>
+        <button id="repeat" class="action-btn">
+            <i class="fas fa-redo"></i>
+        </button>
         <button id="prev" class="action-btn">
             <i class="fas fa-backward"></i>
         </button>
@@ -51,6 +67,10 @@
         <button id="shuffle" class="action-btn">
             <i class="fas fa-random"></i>
         </button>
+        <div class="volume-control-container">
+            <label for="volume-control"></label>
+            <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
+        </div>
     </div>
 </div>
 
