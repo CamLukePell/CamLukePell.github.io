@@ -22,7 +22,7 @@ let list1 = true;
 let shuffleBool = false;
 let repeatBool = false;
 hiddenBool = false;
-
+listPlaying = 1;
 
 
 const OGSONGS1 = ['Sum 41 - Landmines', 'Sum 41 - Rise Up  [Lyrics]','Green Day  The American Dream is Killing Me (Lyrics)',
@@ -89,6 +89,39 @@ const OGSONGS2 =['All I Want','All The Small Things','Another F.U. Song - Anothe
                  'That\'s What You Get','The Best Of Me','The Best Thing (That Never Happened)',
                  'Voldemort','We Don\'t Get High Like We Used To',
                  ];
+const OGSONGS3 =['1901','A-Punk','Ain\'t No Rest For The Wicked - Original Version',
+                 'Alive','All My Friends Are Nobodies','Amber',
+                 'American Idiot','Awake and Alive','Basket Case',
+                 'Behind Blue Eyes','Bleed It Out','Blur',
+                 'Body Bag','Boulevard of Broken Dreams','boy',
+                 'Can\'t Stop','Choker','Could Have Been Me',
+                 'Dark Days','Dog Days Are Over','Down with the Sickness',
+                 'Every Morning','Faint','Fallen',
+                 'Far Away','Feel It Still','Fighting Myself',
+                 'First','Foxtrot Uniform Charlie Kilo','Good Riddance (Time of Your Life)',
+                 'Happy Idiot','Hard Times','Hero',
+                 'High Time','Holiday','House of Gold',
+                 'How You Remind Me','I Bet My Life','I Dare You',
+                 'I Will Follow You into the Dark','In the End','Island In The Sun',
+                 'Left Hand Free','Lifeline','Lonely Boy',
+                 'Lost','Miss Jackson (feat. LOLO)','Modern Girl',
+                 'Monster','Mr. Brightside','My Songs Know What You Did In The Dark (Light Em Up)',
+                 'Numb','One Day','One Last Breath',
+                 'One More Light','Otherside','Our Love',
+                 'Out of My League','Over','Overcome',
+                 'Psycho In My Head','Pumped Up Kicks','Robbery',
+                 'Rude','Run For Cover','Safe And Sound',
+                 'Santeria','Savin\' Me - 2020 Remaster','Scar Tissue',
+                 'Seaside','Sex on Fire','She Moves In Her Own Way',
+                 'Sit Next to Me','Somebody Told Me','Someday',
+                 'Someone To You','Something Good Can Work','Song 2 - 2012 Remaster',
+                 'Such Great Heights - Remastered','Teenage Dirtbag','Teenagers',
+                 'The Reason','The Tornado','The Walk Home',
+                 'Those Days','Toxicity','Under the Bridge',
+                 'Undercover Martyn','Vegas Lights','Viva La Vida',
+                 'Wake Me','Waste A Moment','What You Know',
+                 'When I Come Around','Worse Than This','You Give Love A Bad Name',
+                 'You Shook Me All Night Long','Zombie'];
 
 
 var songs = [...OGSONGS1.sort()];
@@ -125,12 +158,8 @@ function shuffle(array) {
 function loadSong(song) {
 
     title.innerText = song;
-  if(list1){
-   audio.src = `music/Songs1/${song}.mp3`;
-  }
-  else{
-  audio.src = `music/Songs2/${song}.mp3`;
-  }
+    audio.src = `music/Songs${listPlaying}/${song}.mp3`;
+
 
 }
 
@@ -303,25 +332,37 @@ repeatBtn.addEventListener('click', () => {
    });
 
 songListBtn.addEventListener('click', () => {
-    songListBtn.classList.toggle('pressed');
     pauseSong();
-    list1 = !list1;
-
-
-      if(list1){
+    if(listPlaying<3){
+    listPlaying += 1;
+    }
+    else{
+    listPlaying =1
+    }
+    switch(listPlaying){
+        case 1:
+          songListBtn.querySelector('i.fas').classList.remove('fa-heart');
+          songListBtn.querySelector('i.fas').classList.add('fa-circle');
           originalSongs = [...OGSONGS1.sort()];
           shuffledSongs= [...shuffle(OGSONGS1)];
           songs = [...originalSongs];
-      }
-      else{
+          break
+        case 2:
+          songListBtn.querySelector('i.fas').classList.remove('fa-circle');
+          songListBtn.querySelector('i.fas').classList.add('fa-star');
           originalSongs = [...OGSONGS2.sort()];
           shuffledSongs= [...shuffle(OGSONGS2)];
           songs = [...originalSongs];
-      }
-
-
-
-
+          break;
+        case 3:
+          songListBtn.querySelector('i.fas').classList.remove('fa-star');
+          songListBtn.querySelector('i.fas').classList.add('fa-heart');
+          originalSongs = [...OGSONGS3.sort()];
+          shuffledSongs= [...shuffle(OGSONGS3)];
+          songs = [...originalSongs];
+          break;
+          default:
+          }
        clearList();
        fillList(songs);
        if(shuffleBool){

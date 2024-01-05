@@ -15,7 +15,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-family: 'Lato', sans-serif;
   margin: 0;
 }
@@ -26,7 +25,8 @@ body {
   align-items: center;
   background-color: #222222;
   width: 500px;
-  top: 62%;
+  height: 100px;
+  top: calc(100% - 100px);
   border-radius: 15px;
   display: flex;
   padding: 0px 0px;
@@ -139,9 +139,9 @@ body {
             overflow-y: auto;
             border: 0px;
             /* Position relative to the body */
-            position: relative;
-            top: 0;
-            left: calc(50%-200);
+            position: absolute;
+            top: calc(100% - 30VH);
+            left: 0;
         }
 
         #scrollable-list {
